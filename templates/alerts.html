@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Alerts</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/alerts.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+<h2>⚠ Budget Alerts</h2>
+
+{% if alerts %}
+    {% for period, items in alerts.items() %}
+        <h3>{{ period }}</h3>
+        <ul>
+            {% for a in items %}
+                <li>
+                    <strong>{{ a.category }}</strong>
+                    — Budget: ₹{{ a.budget }}
+                    | Spent: ₹{{ a.spent }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+{% else %}
+    <p>No budget alerts found.</p>
+{% endif %}
+
+<a href="/dashboard">Back to Dashboard</a>
+
+</div>
+
+</body>
+</html>

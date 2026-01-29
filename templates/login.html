@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expense Manager - Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+<body>
+
+<div class="auth-container">
+
+    <h1 class="app-title">Expense Manager</h1>
+
+    <div class="auth-card">
+        <h2>Login</h2>
+
+        <form method="post">
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+
+        <a href="/register">Create Account</a>
+    </div>
+
+</div>
+
+</body>
+</html>

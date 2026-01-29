@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Statistics</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/statistics.css') }}">
+
+
+</head>
+<body>
+
+<h2>Statistics</h2>
+
+<h3>Highest Spending Details</h3>
+<ul>
+{% for h in highest_spending %}
+    <li>
+        Month: {{ h.month }} |
+        Year: {{ h.year }} |
+        Category: {{ h.category }} |
+        Amount: ₹{{ h.amount }}
+    </li>
+{% endfor %}
+</ul>
+
+<hr>
+
+<h3>Total Expenses Per Category (All Time)</h3>
+<ul>
+{% for c, amt in global_category_totals.items() %}
+    <li>{{ c }} : ₹{{ amt }}</li>
+{% endfor %}
+</ul>
+
+<hr>
+
+<h3>Select Month & Year</h3>
+
+<form method="get">
+    <select name="month">
+        {% for m in range(1,13) %}
+        <option value="{{ m }}" {% if selected_month == m|string %}selected{% endif %}>
+            {{ m }}
+        </option>
+        {% endfor %}
+    </select>
+
+    <select name="year">
+        {% for y in range(2000,2031) %}
+        <option value="{{ y }}" {% if selected_year == y|string %}selected{% endif %}>
+            {{ y }}
+        </option>
+        {% endfor %}
+    </select>
+
+    <button type="submit">View</button>
+</form>
+
+<!-- PASS DATA SAFELY -->
+<canvas id="barChart" width="500" height="300"></canvas>
+
+<script>
+(function () {
+    const labels = {{ chart_data.keys() | list | tojson | safe }};
+    const values = {{ chart_data.values() | list | tojson | safe }};
+
+    if (!labels.length || !values.length) return;
+
+    const ctx = document.getElementById("barChart").getContext("2d");
+
+    new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels: labels,
+            datasets: [{
+                label: "Category Expense",
+                data: values,
+                backgroundColor: "rgba(54, 162, 235, 0.6)"
+            }]
+        },
+        options: {
+            responsive: false,
+            scales: {
+                y: { beginAtZero: true }
+            }
+        }
+    });
+})();
+</script>
+
+<br>
+<a href="/dashboard">Back to Dashboard</a>
+
+</body>
+</html>

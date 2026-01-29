@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Expenses</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/all_expenses.css') }}">
+
+</head>
+<body>
+
+<h2>All Expenses</h2>
+
+<table border="1">
+    <tr>
+        <th>Date</th>
+        <th>Category</th>
+        <th>Amount</th>
+        <th>Description</th>
+    </tr>
+    {% for e in expenses %}
+    <tr>
+        <td>{{ e.date }}</td>
+        <td>{{ e.category }}</td>
+        <td>{{ e.amount }}</td>
+        <td>{{ e.description }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<br>
+<a href="/dashboard">Back to Dashboard</a>
+
+</body>
+</html>

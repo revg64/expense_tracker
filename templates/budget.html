@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Budgets</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/budget.css') }}">
+
+</head>
+<body>
+
+<div class="container">
+
+<h2>Set Budget for </h2>
+
+<form method="post">
+
+    {% for c in categories %}
+    <div style="display:flex; gap:10px; margin-bottom:10px;">
+        <strong style="width:120px;">{{ c }}</strong>
+
+        <input type="number" step="1" name="amount_{{ c }}" 
+               value="{{ budgets.get(c, '') }}" placeholder="Amount">
+
+        <button name="action" value="set_{{ c }}">Set</button>
+        <button name="action" value="clear_{{ c }}">Clear</button>
+    </div>
+    {% endfor %}
+</form>
+
+<br>
+<a href="/dashboard">Back to Dashboard</a>
+
+</div>
+
+</body>
+</html>

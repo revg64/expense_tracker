@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+</head>
+<body>
+
+<div class="container">
+
+    <h2>Add Expense</h2>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="success-message">
+      {{ messages[0] }}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+
+    <form method="post" action="/add-expense">
+        <div class="form-row">
+            <input type="number" step="1" name="amount" placeholder="Amount" required>
+            <input type="text" name="description" placeholder="Description" required>
+            <input type="date" name="date" required>
+
+            <select name="category" required>
+                <option>Food</option>
+                <option>Travel</option>
+                <option>Rent</option>
+                <option>Shopping</option>
+                <option>Entertainment</option>
+                <option>Utilities</option>
+                <option>Health</option>
+                <option>Education</option>
+            </select>
+
+            <button type="submit">Add</button>
+        </div>
+    </form>
+    <form method="get" action="/budget" style="margin-top:10px;">
+    <input type="hidden" name="month" value="{{ selected_month }}">
+    <input type="hidden" name="year" value="{{ selected_year }}">
+    <button type="submit">Budget</button>
+</form>
+    <form method="get" action="/alerts" style="margin-top:10px;">
+    <button type="submit">Alerts</button>
+</form>
+<form method="get" action="/statistics" style="margin-top:10px;">
+    <button type="submit">Statistics</button>
+</form>
+
+<form method="get" action="/all-expenses" style="margin-top:15px;">
+    <button type="submit">Total Expenses</button>
+</form>
+
+    <hr>
+
+    <h2>Filter</h2>
+
+    <form method="get" action="/dashboard" class="filter-row">
+        <select name="month">
+            {% for m in range(1,13) %}
+            <option value="{{ m }}" {% if m == selected_month %}selected{% endif %}>
+                {{ m }}
+            </option>
+            {% endfor %}
+        </select>
+
+        <select name="year">
+            {% for y in range(2000,2031) %}
+            <option value="{{ y }}" {% if y == selected_year %}selected{% endif %}>
+                {{ y }}
+            </option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">View</button>
+    </form>
+
+    {% if exceeded_categories %}
+<div style="color:red; font-weight:bold; margin:10px 0;">
+    ⚠ Budget exceeded in:
+    {{ exceeded_categories | join(", ") }}
+</div>
+{% endif %}
+
+    <div class="section total-box">
+        Total: ₹ {{ total }}
+    </div>
+    
+
+    <h2>Expenses</h2>
+
+    {% if expenses %}
+    <table>
+        <tr>
+            <th>Amount</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Date</th>
+        </tr>
+        {% for e in expenses %}
+        <tr>
+            <td>{{ e.amount }}</td>
+            <td>{{ e.category }}</td>
+            <td>{{ e.description }}</td>
+            <td>{{ e.date }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        <p>No expenses found for the selected month and year.</p>
+    {% endif %}
+
+    <br>
+    <a href="/logout" class="logout">Logout</a>
+
+</div>
+
+</body>
+</html>

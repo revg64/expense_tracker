@@ -1,0 +1,146 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f6f9;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 30px auto;
+    background-color: #ffffff;
+    padding: 25px 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    margin-top: 0;
+    color: #2c3e50;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #e0e0e0;
+    margin: 30px 0;
+}
+
+.success-message {
+    background-color: #dff9e3;
+    color: #2f8f46;
+    padding: 10px 14px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.form-row input,
+.form-row select {
+    padding: 8px 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.form-row input[type="number"] {
+    width: 100px;
+}
+
+.form-row input[type="text"] {
+    flex: 1;
+}
+
+.form-row input[type="date"] {
+    width: 150px;
+}
+
+.form-row select {
+    width: 150px;
+}
+
+button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #3498db;
+    color: #ffffff;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+form[action="/budget"],
+form[action="/alerts"],
+form[action="/statistics"],
+form[action="/all-expenses"] {
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.filter-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.filter-row select {
+    padding: 6px 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.total-box {
+    background-color: #ecf0f1;
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin: 15px 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+table th {
+    background-color: #f0f2f5;
+    text-align: left;
+    padding: 10px;
+    font-size: 14px;
+}
+
+table td {
+    padding: 10px;
+    border-top: 1px solid #e0e0e0;
+    font-size: 14px;
+}
+
+table tr:hover {
+    background-color: #fafafa;
+}
+
+.logout {
+    display: inline-block;
+    margin-top: 20px;
+    color: #e74c3c;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.logout:hover {
+    text-decoration: underline;
+}
